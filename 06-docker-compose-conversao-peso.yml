@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  conversao-peso:
+    container_name: conversao-peso
+    build:
+      context: conversao-peso
+    restart: always
+    ports:
+      - '8080:80'

@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: question-05
+      MYSQL_USER: user-05
+      MYSQL_PASSWORD: pwd-05
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.1
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: user-05
+      WORDPRESS_DB_PASSWORD: pwd-05
+      WORDPRESS_DB_NAME: question-05
+    volumes:
+      - wordpress:/var/www/html
+
+volumes:
+  mysql-data:
+  wordpress:

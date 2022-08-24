@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:14.5
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: kubedevnews
+      POSTGRES_USER: user-07
+      POSTGRES_PASSWORD: pwd-07
+
+  pgadmin4:
+    image: dpage/pgadmin4:6.12
+    restart: always
+    ports:
+      - '8081:80'
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'user-07@email.com'
+      PGADMIN_DEFAULT_PASSWORD: pwd-07
+
+  kube-news:
+    container_name: kube-news
+    build:
+      context: kube-news
+      args:
+        - DB_HOST=postgres
+        - DB_DATABASE=kubedevnews
+        - DB_USERNAME=user-07
+        - DB_PASSWORD=pwd-07
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_DATABASE: kubedevnews
+      DB_USERNAME: user-07
+      DB_PASSWORD: pwd-07
+
+volumes:
+  postgres-data:

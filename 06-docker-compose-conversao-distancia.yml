@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  conversao-distancia:
+    container_name: conversao-distancia
+    build:
+      context: conversao-distancia
+    restart: always
+    ports:
+      - '8080:80'

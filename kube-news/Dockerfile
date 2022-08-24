@@ -1,0 +1,15 @@
+FROM node:14.20.0-slim
+WORKDIR /app
+
+COPY ./src/package*.json ./
+RUN npm install
+
+COPY ./src .
+
+ENV DB_HOST=$DB_HOST
+ENV DB_DATABASE=$DB_DATABASE
+ENV DB_USERNAME=$DB_USERNAME
+ENV DB_PASSWORD=$DB_PASSWORD
+
+EXPOSE 8080
+CMD ["node", "server.js"]

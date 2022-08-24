@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  mongo:
+    image: mongo:5.0.11
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user-01
+      MONGO_INITDB_ROOT_PASSWORD: pwd-01
+    volumes:
+      - mongodb-data:/data/db
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: always
+    ports:
+      - '8081:8081'
+    depends_on:
+      - mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user-01
+      ME_CONFIG_MONGODB_ADMINPASSWORD: pwd-01
+      ME_CONFIG_MONGODB_URL: mongodb://user-01:pwd-01@mongo:27017/
+
+volumes:
+  mongodb-data:

@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MARIADB_USER: user-02
+      MARIADB_PASSWORD: pwd-02
+      MARIADB_ROOT_PASSWORD: pwd-02
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    restart: always
+    ports:
+      - '8080:80'
+    depends_on:
+      - mariadb
+    environment:
+      PMA_USER: user-02
+      PMA_PASSWORD: pwd-02
+      PMA_HOST: mariadb:3306
+
+volumes:
+  mariadb-data:
