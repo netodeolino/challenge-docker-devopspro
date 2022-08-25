@@ -12,7 +12,7 @@ Challenge Professional Docker - DevOps Pro
 | 05                       | `docker-compose -f 05-docker-compose.yml up`                             |
 | 06 conversao-distancia   | `docker-compose -f 06-docker-compose-conversao-distancia.yml up --build` |
 | 06 conversao-peso        | `docker-compose -f 06-docker-compose-conversao-peso.yml up --build`      |
-| 06 conversao-temperatura | `docker-compose -f 06-docker-compose-conversao-temperatura`              |
+| 06 conversao-temperatura | `docker-compose -f 06-docker-compose-conversao-temperatura up --build`              |
 | 07 kube-news             | `docker-compose -f 07-docker-compose-kube-news.yml up --build`           |
 | 07 rotten-potatoes       | `docker-compose -f 07-docker-compose-rotten-potatoes.yml up --build`     |
 
